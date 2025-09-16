@@ -4,8 +4,6 @@ const api = axios.create({
   baseURL: "https://fixmystreet-backend.onrender.com/api",
 });
 
-
-
 export const reportPothole = (formData) =>
   api.post("/potholes", formData, {
     headers: { "Content-Type": "multipart/form-data" },
