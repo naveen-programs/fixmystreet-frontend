@@ -1,0 +1,116 @@
+/* Reset & Base */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Roboto', sans-serif;
+}
+
+body {
+  background-color: #f7f9fc;
+  color: #2c3e50;
+  line-height: 1.6;
+  font-size: 16px;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 20px;
+}
+
+/* Buttons */
+button,
+.btn {
+  cursor: pointer;
+  border-radius: 8px;
+  font-weight: 500;
+  transition: all 0.3s;
+}
+
+.btn-primary {
+  background-color: #1abc9c;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+}
+
+.btn-primary:hover {
+  background-color: #16a085;
+}
+
+/* Cards */
+.card {
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.12);
+}
+
+/* Navbar */
+.navbar {
+  background-color: #1abc9c;
+  padding: 10px 20px;
+}
+
+.navbar a {
+  color: white;
+  font-weight: 500;
+  margin-right: 15px;
+}
+
+.navbar a:hover {
+  color: #ecf0f1;
+}
+
+/* Forms */
+input,
+textarea,
+select {
+  width: 100%;
+  padding: 10px 15px;
+  margin-bottom: 15px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  border-color: #1abc9c;
+  outline: none;
+}
+
+/* Tables */
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+table th,
+table td {
+  padding: 12px 15px;
+  border-bottom: 1px solid #ddd;
+}
+
+table th {
+  background-color: #1abc9c;
+  color: white;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .container {
+    padding: 15px;
+  }
+}

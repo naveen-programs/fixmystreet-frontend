@@ -1,0 +1,108 @@
+/* View Potholes Page */
+.view-container {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 20px;
+    background: #f5f7fa;
+    font-family: 'Roboto', sans-serif;
+}
+
+.view-header {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #007BFF;
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+/* Grid Layout for Potholes */
+.potholes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+/* Individual Pothole Card */
+.pothole-card {
+    background: #fff;
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+    cursor: pointer;
+}
+
+.pothole-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+/* Card Content */
+.pothole-card img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+.pothole-card h3 {
+    color: #333;
+    font-size: 1.2rem;
+    margin: 10px 0 5px;
+}
+
+.pothole-card p {
+    color: #555;
+    font-size: 0.95rem;
+    line-height: 1.4;
+}
+
+/* Status Badge */
+.pothole-card .status {
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    margin-top: 5px;
+}
+
+.status.open {
+    background-color: #ffc107;
+    color: #fff;
+}
+
+.status.fixed {
+    background-color: #28a745;
+    color: #fff;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .potholes-grid {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    }
+}
+.pothole-card {
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.pothole-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+}
+
+.pothole-card img {
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+  max-height: 200px;
+  object-fit: cover;
+}
+
+h3 {
+  font-weight: 600;
+  color: #333;
+}
