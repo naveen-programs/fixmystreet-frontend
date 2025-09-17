@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { Card, Badge, Container, Row, Col } from "react-bootstrap";
 import { getPotholes } from "../services/api";
+import api from "../services/api"; // ✅ import api for baseURL
 
 function ViewPotholes() {
   const [potholes, setPotholes] = useState([]);
 
   useEffect(() => {
     getPotholes()
-      .then(res => setPotholes(res.data))
-      .catch(err => console.error(err));
+      .then((res) => setPotholes(res.data))
+      .catch((err) => console.error(err));
   }, []);
 
   return (
@@ -21,12 +22,29 @@ function ViewPotholes() {
           {potholes.map((p) => (
             <Col key={p.id} xs={12} sm={6} md={4}>
               <Card className="pothole-card">
-                {p.photoPath && <Card.Img variant="top" src={`http://localhost:8080/${p.photoPath}`} alt="pothole" />}
+                {p.photoPath && (
+                  <Card.Img
+                    variant="top"
+                    src={`${api.defaults.baseURL}/${p.photoPath}`} // ✅ dynamic baseURL
+                    alt="pothole"
+                  />
+                )}
                 <Card.Body>
                   <Card.Title>{p.address}</Card.Title>
                   <Card.Text>{p.description}</Card.Text>
                   <p>
-                    Status: <Badge bg={p.status === "Fixed" ? "success" : p.status === "In Progress" ? "warning" : "danger"}>{p.status}</Badge>
+                    Status:{" "}
+                    <Badge
+                      bg={
+                        p.status === "Fixed"
+                          ? "success"
+                          : p.status === "In Progress"
+                          ? "warning"
+                          : "danger"
+                      }
+                    >
+                      {p.status}
+                    </Badge>
                   </p>
                 </Card.Body>
               </Card>

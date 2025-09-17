@@ -1,6 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { getPotholes, updatePotholeStatus, deletePothole } from "../services/api";
+import {
+  getPotholes,
+  updatePotholeStatus,
+  deletePothole,
+} from "../services/api";
 import { Table, Button, Spinner, Alert, Container } from "react-bootstrap";
+import api from "../services/api"; // ✅ import api for baseURL
 
 function Admin() {
   const [potholes, setPotholes] = useState([]);
@@ -84,7 +89,7 @@ function Admin() {
                 <td>
                   {p.photoPath ? (
                     <img
-                      src={`http://localhost:8080/${p.photoPath}`}
+                      src={`${api.defaults.baseURL}/${p.photoPath}`} // ✅ dynamic baseURL
                       alt="pothole"
                       className="img-fluid rounded"
                       style={{ maxWidth: "80px" }}

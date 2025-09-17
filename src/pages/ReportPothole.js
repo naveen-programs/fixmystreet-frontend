@@ -1,7 +1,7 @@
 // src/pages/ReportPothole.js
 import React, { useState } from "react";
 import { MapContainer, TileLayer, Marker, useMapEvents } from "react-leaflet";
-import { reportPothole } from "../services/api"; // your API function
+import { reportPothole } from "../services/api";
 import "leaflet/dist/leaflet.css";
 import "../styles/ReportPothole.css";
 import L from "leaflet";
@@ -24,7 +24,7 @@ function LocationMarker({ setLocation }) {
     },
   });
 
-  return position === null ? null : <Marker position={position} />;
+  return position ? <Marker position={position} /> : null;
 }
 
 function ReportPothole() {
@@ -50,14 +50,18 @@ function ReportPothole() {
 
     try {
       await reportPothole(formData);
-      alert("Pothole reported successfully!");
+      alert("✅ Pothole reported successfully!");
+
+      // Reset form + marker
       setAddress("");
       setDescription("");
       setPhoto(null);
       setLocation(null);
+
     } catch (err) {
-      console.error(err);
-      alert("Failed to report pothole. Please try again.");
+      console.error("❌ Error reporting pothole:", err);
+      const msg = err.response?.data?.error || "Failed to report pothole. Please try again.";
+      alert(msg);
     }
   };
 
@@ -65,6 +69,7 @@ function ReportPothole() {
     <div className="container mt-4">
       <h3>Report a Pothole</h3>
       <form onSubmit={handleSubmit}>
+        {/* Address */}
         <div className="mb-3">
           <label>Address</label>
           <input
@@ -75,6 +80,8 @@ function ReportPothole() {
             required
           />
         </div>
+
+        {/* Description */}
         <div className="mb-3">
           <label>Description</label>
           <textarea
@@ -84,6 +91,8 @@ function ReportPothole() {
             required
           ></textarea>
         </div>
+
+        {/* Photo */}
         <div className="mb-3">
           <label>Photo (optional)</label>
           <input
@@ -93,6 +102,8 @@ function ReportPothole() {
             onChange={(e) => setPhoto(e.target.files[0])}
           />
         </div>
+
+        {/* Map */}
         <div className="mb-3">
           <label>Select Location on Map</label>
           <MapContainer
@@ -104,7 +115,9 @@ function ReportPothole() {
             <LocationMarker setLocation={setLocation} />
           </MapContainer>
         </div>
-        <button type="submit" className="btn btn-primary mt-3" disabled={!location}>
+
+        {/* Submit */}
+        <button type="submit" className="btn btn-primary mt-3">
           Report Pothole
         </button>
       </form>

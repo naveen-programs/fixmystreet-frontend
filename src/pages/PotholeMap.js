@@ -2,9 +2,10 @@ import React, { useEffect, useState } from "react";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import L from "leaflet";
 import { getPotholes } from "../services/api";
+import api from "../services/api"; // ✅ import api for baseURL
 import "../styles/PotholeMap.css";
 
-// Import Leaflet default icons properly (for CRA/webpack)
+// Import Leaflet default icons properly
 import markerIcon2x from "leaflet/dist/images/marker-icon-2x.png";
 import markerIcon from "leaflet/dist/images/marker-icon.png";
 import markerShadow from "leaflet/dist/images/marker-shadow.png";
@@ -73,7 +74,7 @@ function PotholeMap() {
               <p>Status: {p.status}</p>
               {p.photoPath && (
                 <img
-                  src={`http://localhost:8080/${p.photoPath}`}
+                  src={`${api.defaults.baseURL}/${p.photoPath}`} // ✅ dynamic baseURL
                   alt="pothole"
                   style={{ width: "100%", borderRadius: "5px" }}
                 />

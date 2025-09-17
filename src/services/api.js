@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "https://fixmystreet-backend.onrender.com/api",
+  baseURL: "https://fixmystreet-backend.onrender.com",
 });
 
 export const reportPothole = (formData) =>
