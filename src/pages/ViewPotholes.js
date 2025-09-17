@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Card, Badge, Container, Row, Col } from "react-bootstrap";
 import { getPotholes } from "../services/api";
-import api from "../services/api";
+// import api from "../services/api";
 
 function ViewPotholes() {
   const [potholes, setPotholes] = useState([]);
