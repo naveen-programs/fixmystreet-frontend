@@ -1,4 +1,3 @@
-// src/pages/ReportPothole.js
 import React, { useState } from "react";
 import { MapContainer, TileLayer, Marker, useMapEvents } from "react-leaflet";
 import { reportPothole } from "../services/api";
@@ -6,7 +5,7 @@ import "leaflet/dist/leaflet.css";
 import "../styles/ReportPothole.css";
 import L from "leaflet";
 
-// Fix for default marker icons in React-Leaflet
+// Fix default marker icons for React-Leaflet
 delete L.Icon.Default.prototype._getIconUrl;
 L.Icon.Default.mergeOptions({
   iconRetinaUrl: require("leaflet/dist/images/marker-icon-2x.png"),
@@ -14,8 +13,9 @@ L.Icon.Default.mergeOptions({
   shadowUrl: require("leaflet/dist/images/marker-shadow.png"),
 });
 
-function LocationMarker({ setLocation }) {
-  const [position, setPosition] = useState(null);
+// Component to place marker on map click
+function LocationMarker({ location, setLocation }) {
+  const [position, setPosition] = useState(location || null);
 
   useMapEvents({
     click(e) {
@@ -32,6 +32,7 @@ function ReportPothole() {
   const [description, setDescription] = useState("");
   const [photo, setPhoto] = useState(null);
   const [location, setLocation] = useState(null);
+  const [submitting, setSubmitting] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -49,19 +50,21 @@ function ReportPothole() {
     if (photo) formData.append("photo", photo);
 
     try {
+      setSubmitting(true);
       await reportPothole(formData);
       alert("✅ Pothole reported successfully!");
 
-      // Reset form + marker
+      // Reset form and map marker
       setAddress("");
       setDescription("");
       setPhoto(null);
       setLocation(null);
-
     } catch (err) {
       console.error("❌ Error reporting pothole:", err);
       const msg = err.response?.data?.error || "Failed to report pothole. Please try again.";
       alert(msg);
+    } finally {
+      setSubmitting(false);
     }
   };
 
@@ -107,18 +110,18 @@ function ReportPothole() {
         <div className="mb-3">
           <label>Select Location on Map</label>
           <MapContainer
-            center={[13.0827, 80.2707]} // Default center (Chennai)
+            center={[13.0827, 80.2707]} // Chennai
             zoom={13}
             style={{ height: "400px", width: "100%" }}
           >
             <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
-            <LocationMarker setLocation={setLocation} />
+            <LocationMarker location={location} setLocation={setLocation} />
           </MapContainer>
         </div>
 
         {/* Submit */}
-        <button type="submit" className="btn btn-primary mt-3">
-          Report Pothole
+        <button type="submit" className="btn btn-primary mt-3" disabled={submitting}>
+          {submitting ? "Submitting..." : "Report Pothole"}
         </button>
       </form>
     </div>

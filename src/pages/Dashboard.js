@@ -1,3 +1,4 @@
+// src/pages/Dashboard.js
 import React, { useEffect, useState } from "react";
 import { Card, Container, Row, Col, Badge, Spinner, Alert } from "react-bootstrap";
 import { getPotholes } from "../services/api";
@@ -9,13 +10,14 @@ function Dashboard() {
   const [error, setError] = useState("");
 
   useEffect(() => {
+    // Fetch all potholes from backend
     getPotholes()
       .then((res) => setPotholes(res.data))
       .catch(() => setError("Failed to fetch potholes data"))
       .finally(() => setLoading(false));
   }, []);
 
-  // Calculate counts in one pass
+  // Calculate counts
   const counts = potholes.reduce(
     (acc, p) => {
       if (p.status === "Fixed") acc.fixed += 1;
