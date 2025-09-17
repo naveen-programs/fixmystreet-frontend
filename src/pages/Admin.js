@@ -5,7 +5,7 @@ import {
   deletePothole,
 } from "../services/api";
 import { Table, Button, Spinner, Alert, Container } from "react-bootstrap";
-import api from "../services/api"; // ✅ import api for baseURL
+import api from "../services/api";
 
 function Admin() {
   const [potholes, setPotholes] = useState([]);
@@ -30,8 +30,8 @@ function Admin() {
   const handleStatusChange = async (id, newStatus) => {
     try {
       await updatePotholeStatus(id, newStatus);
-      fetchPotholes(); // refresh
-    } catch (err) {
+      fetchPotholes();
+    } catch {
       alert("Failed to update status");
     }
   };
@@ -40,8 +40,8 @@ function Admin() {
     if (window.confirm("Are you sure you want to delete this pothole?")) {
       try {
         await deletePothole(id);
-        fetchPotholes(); // refresh
-      } catch (err) {
+        fetchPotholes();
+      } catch {
         alert("Failed to delete pothole");
       }
     }
@@ -53,8 +53,6 @@ function Admin() {
   return (
     <Container className="mt-4">
       <h2 className="mb-3">Admin Dashboard</h2>
-
-      {/* ✅ Responsive wrapper */}
       <div className="table-responsive">
         <Table striped bordered hover className="align-middle">
           <thead>
@@ -89,7 +87,7 @@ function Admin() {
                 <td>
                   {p.photoPath ? (
                     <img
-                      src={`${api.defaults.baseURL}/${p.photoPath}`} // ✅ dynamic baseURL
+                      src={`${api.defaults.baseURL}/uploads/${p.photoPath}`}
                       alt="pothole"
                       className="img-fluid rounded"
                       style={{ maxWidth: "80px" }}

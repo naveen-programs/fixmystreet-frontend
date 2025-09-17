@@ -2,15 +2,13 @@ import React, { useEffect, useState } from "react";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import L from "leaflet";
 import { getPotholes } from "../services/api";
-import api from "../services/api"; // ✅ import api for baseURL
+import api from "../services/api";
 import "../styles/PotholeMap.css";
 
-// Import Leaflet default icons properly
 import markerIcon2x from "leaflet/dist/images/marker-icon-2x.png";
 import markerIcon from "leaflet/dist/images/marker-icon.png";
 import markerShadow from "leaflet/dist/images/marker-shadow.png";
 
-// Fix default marker issue
 delete L.Icon.Default.prototype._getIconUrl;
 L.Icon.Default.mergeOptions({
   iconRetinaUrl: markerIcon2x,
@@ -24,18 +22,15 @@ function PotholeMap() {
 
   useEffect(() => {
     getPotholes()
-      .then((res) => {
-        setPotholes(res.data || []);
-      })
+      .then((res) => setPotholes(res.data || []))
       .catch((err) => {
         console.error("Error fetching potholes:", err);
         setError("Failed to load potholes. Please try again later.");
       });
   }, []);
 
-  // Custom marker icons based on pothole status
-  const getMarkerIcon = (status) => {
-    return new L.Icon({
+  const getMarkerIcon = (status) =>
+    new L.Icon({
       iconUrl:
         status === "Fixed"
           ? "https://maps.google.com/mapfiles/ms/icons/green-dot.png"
@@ -46,14 +41,13 @@ function PotholeMap() {
       shadowUrl: markerShadow,
       shadowSize: [41, 41],
     });
-  };
 
   return (
     <div className="map-container">
       <h3>Pothole Map</h3>
       {error && <p className="error">{error}</p>}
       <MapContainer
-        center={[13.0827, 80.2707]} // Default Chennai location
+        center={[13.0827, 80.2707]}
         zoom={12}
         scrollWheelZoom
         style={{ height: "600px", width: "100%" }}
@@ -74,7 +68,7 @@ function PotholeMap() {
               <p>Status: {p.status}</p>
               {p.photoPath && (
                 <img
-                  src={`${api.defaults.baseURL}/${p.photoPath}`} // ✅ dynamic baseURL
+                  src={`${api.defaults.baseURL}/uploads/${p.photoPath}`}
                   alt="pothole"
                   style={{ width: "100%", borderRadius: "5px" }}
                 />

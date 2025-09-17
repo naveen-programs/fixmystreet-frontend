@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Card, Badge, Container, Row, Col } from "react-bootstrap";
 import { getPotholes } from "../services/api";
-import api from "../services/api"; // ✅ import api for baseURL
+import api from "../services/api";
 
 function ViewPotholes() {
   const [potholes, setPotholes] = useState([]);
@@ -25,7 +25,7 @@ function ViewPotholes() {
                 {p.photoPath && (
                   <Card.Img
                     variant="top"
-                    src={`${api.defaults.baseURL}/${p.photoPath}`} // ✅ dynamic baseURL
+                    src={`${api.defaults.baseURL}/uploads/${p.photoPath}`}
                     alt="pothole"
                   />
                 )}
