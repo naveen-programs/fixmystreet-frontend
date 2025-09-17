@@ -87,7 +87,8 @@ function Admin() {
                 <td>
                   {p.photoPath ? (
                     <img
-                      src={`${api.defaults.baseURL}/uploads/${p.photoPath}`}
+                    src={`${process.env.REACT_APP_API_URL}/uploads/${p.photoPath}`}
+                      // src={`${api.defaults.baseURL}/uploads/${p.photoPath}`}
                       alt="pothole"
                       className="img-fluid rounded"
                       style={{ maxWidth: "80px" }}
