@@ -1,22 +1,17 @@
 import React, { useEffect, useState } from "react";
-import {
-  getPotholes,
-  updatePotholeStatus,
-  deletePothole,
-} from "../services/api";
 import { Table, Button, Spinner, Alert, Container } from "react-bootstrap";
+import { getPotholes, updatePotholeStatus, deletePothole } from "../services/api";
 
 function Admin() {
   const [potholes, setPotholes] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
-  // Fetch all potholes
   const fetchPotholes = async () => {
     try {
       const res = await getPotholes();
       setPotholes(res.data);
-    } catch (err) {
+    } catch {
       setError("Failed to load potholes");
     } finally {
       setLoading(false);
@@ -27,7 +22,6 @@ function Admin() {
     fetchPotholes();
   }, []);
 
-  // Change status of a pothole
   const handleStatusChange = async (id, newStatus) => {
     try {
       await updatePotholeStatus(id, newStatus);
@@ -37,7 +31,6 @@ function Admin() {
     }
   };
 
-  // Delete a pothole
   const handleDelete = async (id) => {
     if (window.confirm("Are you sure you want to delete this pothole?")) {
       try {

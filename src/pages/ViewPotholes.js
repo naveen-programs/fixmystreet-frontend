@@ -1,15 +1,21 @@
 import React, { useEffect, useState } from "react";
-import { Card, Badge, Container, Row, Col } from "react-bootstrap";
+import { Card, Badge, Container, Row, Col, Spinner, Alert } from "react-bootstrap";
 import { getPotholes } from "../services/api";
 
 function ViewPotholes() {
   const [potholes, setPotholes] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
 
   useEffect(() => {
     getPotholes()
       .then((res) => setPotholes(res.data))
-      .catch((err) => console.error("Error fetching potholes:", err));
+      .catch(() => setError("Failed to load potholes"))
+      .finally(() => setLoading(false));
   }, []);
+
+  if (loading) return <Spinner animation="border" className="m-3" />;
+  if (error) return <Alert variant="danger">{error}</Alert>;
 
   return (
     <Container className="mt-4">
@@ -39,7 +45,7 @@ function ViewPotholes() {
                           ? "success"
                           : p.status === "In Progress"
                           ? "warning"
-                          : "danger"
+                          : "secondary"
                       }
                     >
                       {p.status}
