@@ -25,7 +25,8 @@ function ViewPotholes() {
                 {p.photoPath && (
                   <Card.Img
                     variant="top"
-                    src={`${api.defaults.baseURL}/uploads/${p.photoPath}`}
+                    // src={`${api.defaults.baseURL}/uploads/${p.photoPath}`}
+                     src={`${process.env.REACT_APP_API_URL}/uploads/${p.photoPath}`}
                     alt="pothole"
                   />
                 )}
