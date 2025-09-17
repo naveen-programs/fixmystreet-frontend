@@ -7,13 +7,13 @@ const api = axios.create({
 export const getPotholes = () => api.get("/api/potholes");
 
 export const reportPothole = (formData) =>
-  api.post("/potholes", formData, {
+  api.post("/api/potholes", formData, {
     headers: { "Content-Type": "multipart/form-data" },
   });
 
 export const updatePotholeStatus = (id, status) =>
-  api.put(`/potholes/${id}`, { status });
+  api.put(`/api/potholes/${id}`, { status });
 
-export const deletePothole = (id) => api.delete(`/potholes/${id}`);
+export const deletePothole = (id) => api.delete(`/api/potholes/${id}`);
 
 export default api;
