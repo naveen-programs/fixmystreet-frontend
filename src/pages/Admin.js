@@ -5,13 +5,13 @@ import {
   deletePothole,
 } from "../services/api";
 import { Table, Button, Spinner, Alert, Container } from "react-bootstrap";
-// import api from "../services/api";
 
 function Admin() {
   const [potholes, setPotholes] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
+  // Fetch all potholes
   const fetchPotholes = async () => {
     try {
       const res = await getPotholes();
@@ -27,6 +27,7 @@ function Admin() {
     fetchPotholes();
   }, []);
 
+  // Change status of a pothole
   const handleStatusChange = async (id, newStatus) => {
     try {
       await updatePotholeStatus(id, newStatus);
@@ -36,6 +37,7 @@ function Admin() {
     }
   };
 
+  // Delete a pothole
   const handleDelete = async (id) => {
     if (window.confirm("Are you sure you want to delete this pothole?")) {
       try {
@@ -87,8 +89,7 @@ function Admin() {
                 <td>
                   {p.photoPath ? (
                     <img
-                    src={`${process.env.REACT_APP_API_URL}/uploads/${p.photoPath}`}
-                      // src={`${api.defaults.baseURL}/uploads/${p.photoPath}`}
+                      src={`${process.env.REACT_APP_API_URL}/uploads/${p.photoPath}`}
                       alt="pothole"
                       className="img-fluid rounded"
                       style={{ maxWidth: "80px" }}

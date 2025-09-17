@@ -1,19 +1,24 @@
 import axios from "axios";
 
+// Base API instance
 const api = axios.create({
   baseURL: process.env.REACT_APP_API_URL || "http://localhost:8080",
 });
 
-export const getPotholes = () => api.get("/api/potholes");
+// Fetch all potholes
+export const getPotholes = () => api.get("/potholes");
 
+// Report a new pothole
 export const reportPothole = (formData) =>
-  api.post("/api/potholes", formData, {
+  api.post("/potholes", formData, {
     headers: { "Content-Type": "multipart/form-data" },
   });
 
+// Update pothole status
 export const updatePotholeStatus = (id, status) =>
-  api.put(`/api/potholes/${id}`, { status });
+  api.put(`/potholes/${id}`, { status });
 
-export const deletePothole = (id) => api.delete(`/api/potholes/${id}`);
+// Delete a pothole
+export const deletePothole = (id) => api.delete(`/potholes/${id}`);
 
 export default api;

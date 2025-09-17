@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Card, Badge, Container, Row, Col } from "react-bootstrap";
 import { getPotholes } from "../services/api";
-// import api from "../services/api";
 
 function ViewPotholes() {
   const [potholes, setPotholes] = useState([]);
@@ -9,7 +8,7 @@ function ViewPotholes() {
   useEffect(() => {
     getPotholes()
       .then((res) => setPotholes(res.data))
-      .catch((err) => console.error(err));
+      .catch((err) => console.error("Error fetching potholes:", err));
   }, []);
 
   return (
@@ -25,8 +24,7 @@ function ViewPotholes() {
                 {p.photoPath && (
                   <Card.Img
                     variant="top"
-                    // src={`${api.defaults.baseURL}/uploads/${p.photoPath}`}
-                     src={`${process.env.REACT_APP_API_URL}/uploads/${p.photoPath}`}
+                    src={`${process.env.REACT_APP_API_URL}/uploads/${p.photoPath}`}
                     alt="pothole"
                   />
                 )}
