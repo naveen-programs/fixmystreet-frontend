@@ -5,7 +5,7 @@ import {
   deletePothole,
 } from "../services/api";
 import { Table, Button, Spinner, Alert, Container } from "react-bootstrap";
-import api from "../services/api";
+// import api from "../services/api";
 
 function Admin() {
   const [potholes, setPotholes] = useState([]);
