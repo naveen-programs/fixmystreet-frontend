@@ -52,7 +52,8 @@ function Admin() {
         <Table striped bordered hover className="align-middle">
           <thead>
             <tr>
-              <th>ID</th>
+              {/* <th>ID</th> */}
+              <th>Unique Id</th>
               <th>Address</th>
               <th>Description</th>
               <th>Status</th>
@@ -63,7 +64,7 @@ function Admin() {
           <tbody>
             {potholes.map((p) => (
               <tr key={p.id}>
-                <td>{p.id}</td>
+                <td>{p.id}</td> 
                 <td>{p.address}</td>
                 <td>{p.description}</td>
                 <td>
